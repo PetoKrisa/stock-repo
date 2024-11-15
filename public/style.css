@@ -87,6 +87,21 @@ input[type="submit"]{
     cursor: pointer;
 }
 
+.table input[type="checkbox"]{
+    max-width: fit-content;
+    margin: 0px;
+}
+.table label{
+    font-size: 18px;
+    opacity: 0.8;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    bottom: 2px;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+}
+
 .header{
     background-color: var(--foreground);
     color: white;

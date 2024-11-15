@@ -50,3 +50,24 @@ async function loadCharts(){
     }
 }
 loadCharts()
+
+let showDeposit = localStorage.getItem("showDeposit") || true
+if(showDeposit ==="true"){
+    document.getElementById("toggleDepositCheckbox").checked = true
+}
+else if(showDeposit==="false"){
+    document.getElementById("toggleDepositCheckbox").checked = false
+} 
+function toggleDeposits(){
+    let box = document.getElementById("toggleDepositCheckbox")
+    for(let i of document.getElementsByClassName("utalas")){
+        if(box.checked){
+            i.style.display = "table-row"
+            localStorage.setItem("showDeposit","true")
+        } else{
+            i.style.display = "none"
+            localStorage.setItem("showDeposit","false")
+        }
+    }
+}
+toggleDeposits()
