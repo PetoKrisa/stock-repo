@@ -46,6 +46,7 @@ function submitForm(url,form){
     formData.forEach((v,k)=>{
         jsonPayload[k] = v;
     })
+    console.log(url, jsonPayload)
 
     fetch(url, {method: "post", redirect:"manual", headers: {"Content-Type": "application/json"}, body: JSON.stringify(jsonPayload)})
     .then((res)=>{

@@ -322,6 +322,16 @@ form input:disabled, form button:disabled, form select:disabled{
     }
 
 }
+
+#userDialog{
+    color: white;
+
+}
+
+#addUserDialog{
+    background-color: transparent;
+    border: none;
+}
 @media (max-width: 824px) {
     .icon{
         width: 25px;

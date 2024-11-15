@@ -12,6 +12,7 @@
         <%if(isAdmin){%>
             <button onclick="openDialog('uploadDialog')"><img class="icon" src="/public/icons/add.png" alt="Új tranzakció"></button>
             <button onclick="openDialog('deleteDialog')"><img class="icon" src="/public/icons/delete.png" alt="Törlés"></button>
+            <button onclick="openDialog('userDialog')"><img class="icon" src="/public/icons/users.png" alt="Felhasználók"></button>
         <%}%>
         <div style="margin-left: auto !important;">
             <a href="/logout">Kijelentkezés</a><p id="logoutTimer">0:00</p>
@@ -108,6 +109,33 @@
         <h3>Biztosan törli?</h3>
         <input type="button" value="Törlés" onclick="deleteSelectedRow()">
         <input type="button" value="Mégsem" onclick="closeDialog('deleteDialog')">
+    </dialog>
+
+    <dialog id="userDialog">
+        <%for(let x of users){%>
+            <div>
+                <h3><%=x.username%></h3>
+                <p><%=x.name%></p>
+                <hr>
+            </div>
+        <%}%>
+        <input type="button" value="Hozzáadás" onclick="openDialog('addUserDialog')">
+        <input type="button" value="Bezár" onclick="closeDialog('userDialog')">
+
+    </dialog>
+
+    <dialog id="addUserDialog" >
+        <form id="addUserForm" action="javascript:void(0)" method="post" onsubmit="submitForm('/user', this)">
+            <input type="text" id="username" placeholder="username" name="username">
+            <br>
+            <input type="text" id="name" placeholder="name" name="name">
+            <br>
+            <input type="text" id="password" placeholder="password" name="password">
+            <br>
+            <input type="submit" value="Feltölt" id="submitUser">
+            <input type="button" value="Bezár" onclick="closeDialog('addUserDialog')">
+
+        </form>
     </dialog>
     <%}%>
 

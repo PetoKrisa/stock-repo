@@ -7,7 +7,10 @@ const {db} = require("./db")
 const auth = require("./auth/middleware")
 const stock = require("./stock/stockModel")
 const user = require("./user/userModel")
+var crypto = require('crypto');
+
 const stockRouter = require("./stock/stockRouter")
+const userRouter = require("./user/userRouter")
     
 require('dotenv').config()
 const port = process.env.port
@@ -25,6 +28,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 
 app.use("/", stockRouter)
+app.use("/", userRouter)
 
 app.get("/", auth.resetCookie, async (req,res)=>{
     let stocks;
