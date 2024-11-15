@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/public/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Stocks</title>
+</head>
+<body>
+    <div class="header">
+        <%if(isAdmin){%>
+            <button onclick="openDialog('uploadDialog')"><img class="icon" src="/public/icons/add.png" alt="Új tranzakció"></button>
+            <button onclick="openDialog('deleteDialog')"><img class="icon" src="/public/icons/delete.png" alt="Törlés"></button>
+        <%}%>
+        <div style="margin-left: auto !important;">
+            <a href="/logout">Kijelentkezés</a><p id="logoutTimer">0:00</p>
+        </div>
+    
+    </div>
+    <div class="container">
+        <div class="table">
+            <table>
+                <tr>
+                    <th>Össz Ár</th>
+                    <th>Név</th>
+                    <th>Kinek</th>
+                    <th>Ár USD</th>
+                    <th>Dátum</th>
+                    <th>USD HUF</th>
+                    <th>Mennyiség</th>
+                </tr>
+
+                <%for(let i of stocks){%>
+                    <tr onclick="selectTableRow(this)" data-id="<%=i.id%>" class="<%=(i.stockName=="UTALÁS") ? 'utalas' : ''%>" >
+                        <%if(i.stockName == "UTALÁS" && !isAdmin){%>
+                            <td class="<%=(i.balanceHUF*-1 < 0) ? 'bad' : 'good'%>"><%=i.balanceHUF*-1%></td>
+                        <%} else{%>
+                            <td class="<%=(i.balanceHUF < 0) ? 'bad' : 'good'%>"><%=i.balanceHUF%></td>
+                        <%}%>
+                        <td><%=i.stockName%></td>
+                        <td><%=i.username%></td>
+                        <td><%=i.priceUSD%></td>
+                        <td title="<%=betterDateTime(i.date)%>"><%=betterDate(i.date)%></td>
+                        <td><%=i.USDHUF%></td>
+                        <td><%=i.stockAmount%></td>
+                    </tr>
+                <%}%>
+                
+            </table>
+            
+        </div>
+        <div class="users">
+            <h3>Statisztika</h3>
+            <div class="userStatistics">
+                <%for(let u of users){%>
+                    <div class="userStatistic">
+                        <h3><%=u.username%></h3>
+                        <p><b>Befektetett pénz:</b> <span class="<%=(u.deposit < 0) ? 'bad' : 'good'%>" ><%=u.deposit%></span> HUF</p>
+                        <p><b>Eddigi Profit</b> <span class="<%=(u.profit < 0) ? 'bad' : 'good'%>" ><%=u.profit%></span> HUF</p>
+                        <hr>
+                        <h3>Portfolio</h3>
+                        <div class="chartContainer">
+                            <canvas id="generated-<%=u.username%>" data-username="<%=u.username%>" class="portfolio-chart"></canvas>
+                        </div>
+                        <%for(let d of u.distribution){%>
+                            <p><b><%=d.stockName%></b>&nbsp;&nbsp;&nbsp;&nbsp;<%=d.percentage%>%</p>
+                        <%}%>
+                    </div>
+                    <%}%>
+            </div>
+            
+
+        </div>
+
+    </div>
+
+    <%if(isAdmin){%>
+    <dialog id="uploadDialog" >
+        <form id="uploadForm" action="javascript:void(0)" method="post" onsubmit="submitForm('/stock', this)">
+            <input oninput="validateUploadForm(this.parentElement)" type="number" id="balanceHUF" name="balanceHUF" placeholder="Össz Ár (HUF)">
+            <br>
+            <input oninput="validateUploadForm(this.parentElement)" type="text" id="amount" name="amount" placeholder="Mennyiség">
+            <br>
+            <hr>
+            <input oninput="validateUploadForm(this.parentElement)" type="text" id="name" name="name" placeholder="Név" required>
+            <br>
+            <select oninput="validateUploadForm(this.parentElement)" name="user" id="user" required>
+                <option value=""></option>
+                <%for(let u of users){%>
+                    <option value="<%=u.username%>"><%=u.username%></option>
+                <%}%>
+            </select>
+            <br>
+            <input oninput="validateUploadForm(this.parentElement)" type="number" value="" id="priceUSD" name="priceUSD" placeholder="Ár USD" step="0.01">
+            <br>
+            <input oninput="validateUploadForm(this.parentElement)" type="datetime-local" name="date" id="date" required>
+            <br>
+            <input oninput="validateUploadForm(this.parentElement)" type="number" name="USDHUF" id="USDHUF" placeholder="USD HUF" step="0.01">
+            <br>
+            <hr>
+            <input type="submit" value="Feltölt" id="submitUpload">
+            <input type="button" value="Bezár" onclick="closeDialog('uploadDialog')">
+        </form>
+    </dialog>
+
+    <dialog id="deleteDialog">
+        <h3>Biztosan törli?</h3>
+        <input type="button" value="Törlés" onclick="deleteSelectedRow()">
+        <input type="button" value="Mégsem" onclick="closeDialog('deleteDialog')">
+    </dialog>
+    <%}%>
+
+    <script src="/public/common.js"></script>
+    <script src="/public/stockChart.js"></script>
+</body>
+</html>

@@ -1,0 +1,372 @@
+:root{
+    --background: rgb(48, 50, 56);
+    --accent: rgb(78, 80, 90);
+    --good: rgb(9, 210, 32);
+    --bad: rgb(216, 35, 35);
+    --foreground:  rgb(33, 35, 39);;
+}
+
+*{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.icon{
+    width: 30px;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+body{
+    background-color: var(--background);
+    height: 95vh;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+}
+html{
+    width: 100%;
+}
+
+button{
+    cursor: pointer;
+    outline: none   ;
+}
+
+.loginContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+form{
+    border: 1px solid var(--accent);
+    padding: 20px;
+    border-radius: 10px;
+    background-color: var(--foreground);
+    
+}
+
+form select,form input, select, input {
+    font-size: 22px;
+    color: white;
+
+    width: 100%;
+    border: 1px solid var(--accent);
+    background-color: var(--accent);
+    align-self: center;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+
+}
+
+input[type="submit"]{
+    cursor: pointer;
+}
+
+.header{
+    background-color: var(--foreground);
+    color: white;
+    font-size: 24px;
+    padding: 5px 5px 5px 0px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.header a{
+    color: white;
+    padding: 5px;
+}
+
+.header #logoutTimer{
+    margin: 0px;
+    margin-right: 10px;
+    padding: 5px;
+    display: inline;
+}
+
+.header button{
+    background-color: var(--accent);
+    color: white;
+    border-radius: 10px;
+    border: none;
+    padding: 3px;
+    margin-left: 5px;
+}
+
+.container{
+    color: white;
+    padding: 10px;
+    font-size: 22px;
+    display: grid;
+    grid-template-columns: min-content max-content;
+}
+
+.container div{
+    display: inline-block;
+    vertical-align: top;
+}
+
+.users{
+    margin-left: 20px;
+    max-height: 90vh;
+    max-width: 50vw;
+    height: 90vh;
+    max-width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;
+}
+
+.users h3{
+    margin: 0px;
+}
+.users > h3{
+    position: sticky;
+    top: 0;
+    box-shadow: 0px 0px 10px 5px var(--background);
+    background-color: var(--background);
+
+}
+
+.users p{
+    font-size: 18px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.userStatistics{
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.userStatistic{
+    background-color: var(--foreground);
+    border-radius: 10px;
+    border: 1px solid var(--accent);
+    padding: 10px;
+    margin-top: 15px;
+    margin-right: 10px;
+    width: 280px;
+
+    box-shadow: 10px 10px 20px rgba(0,0,0,0.4);
+    
+}
+
+.good{
+    color: var(--good);
+}
+
+.bad{
+    color: var(--bad);
+}
+
+table{
+    background-color: var(--foreground);
+    border: 1px solid var(--accent);
+    border-collapse: collapse;
+    overflow-y: scroll;
+    box-shadow: 10px 10px 20px rgba(0,0,0,0.4);
+    
+}
+.table{
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 90vh;
+    position: relative;
+
+}
+
+td, th{
+    padding: 8px;
+    border: 1px solid var(--accent);
+}
+tr.selected{
+    background-color: var(--accent);
+}
+
+th{
+    top: -1px ;
+    position: sticky;
+    background-color: var(--foreground);
+    margin: -1px;
+    z-index: 20;
+    border: 1px solid var(--accent);
+}
+.utalas{
+    opacity: .4;
+    font-size: 90%;
+}
+
+dialog{
+    border: 1px solid var(--accent);
+    border-radius: 10px;
+    background-color: var(--foreground);
+    outline: none !important;
+    background-color: var(--foreground);
+}
+
+#uploadDialog{
+    background-color: transparent;
+    border: none;
+}
+
+dialog::backdrop{
+    background-color: rgba(0,0,0,0.5);
+}
+
+input{
+    outline: none;
+    cursor: pointer;
+}
+
+hr{
+    background-color: var(--accent);
+    border-color: var(--accent);
+}
+
+form input:disabled, form button:disabled, form select:disabled{
+    opacity: 0.5 !important;
+}
+
+#deleteDialog input{
+    width: fit-content;
+}
+#deleteDialog input[value="Törlés"]{
+    background-color: var(--bad);
+    color: white;
+}
+#deleteDialog h3{
+    font-size: 24px;
+    color: white;
+}
+#deleteDialog{
+    text-align: center;
+}
+.chartContainer{
+    width: 100%;
+    
+}
+.chartContainer canvas{
+    width: 70%;
+    margin: auto;
+}
+@media (max-width: 1350px){
+    .users{
+        padding: 0px;
+        padding-left: 13px;
+        padding-right: 13px;
+        margin: 0px;
+        margin-top: 10px;
+        max-height: 50vh;
+    }
+    .userStatistics{
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 20px;
+    }
+    .userStatistic{
+        width: 95%;
+    }
+    .userStatistic p{
+        font-size: 22px;
+    }
+
+    .container{
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .table{
+        height: fit-content;
+        max-height: 40vh;
+        margin-top: 10px;
+    }
+
+    table{
+        font-size: 25px;
+        margin: auto;
+    }
+    td,th{
+        padding: 5px;
+    }
+    .chartContainer{
+        width: 100%;
+        
+    }
+    .chartContainer canvas{
+        width: 45%;
+        margin: auto;
+    }
+
+}
+@media (max-width: 824px) {
+    .icon{
+        width: 25px;
+    }
+    .header button{
+        height: 32px;
+    }
+    table{
+        font-size: 3vw;
+        padding: 2px;
+    }
+    td,th{
+        padding: 2px;
+    }
+    .container{
+        padding: 2px;
+    }
+    .header{
+        font-size: 18px;
+    }
+    .header button{
+        font-size: 18px;
+    }
+    .userStatistics{
+        grid-template-columns: repeat(1,1fr);
+    }
+    .userStatistic{
+        width: fit-content;
+        width: 93%;
+    }
+    .userStatistic h3{
+        font-size: 20px !important;
+        text-decoration: underline;
+    }
+    .userStatistic p{
+        font-size: 16px;
+        margin: 6px 0px 6px 0px !important;
+    }
+
+    .chartContainer{
+        width: 100%;
+        
+    }
+    .chartContainer canvas{
+        width: 55%;
+        margin: auto;
+    }
+}

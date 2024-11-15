@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/public/style.css">
+    <title>Login</title>
+</head>
+<body>
+    <div class="loginContainer">
+        <form id="loginForm" action="/login" method="post">
+            <select name="username" id="username" type="username" class="username-select">
+                <option value=""></option>
+                <%for(let i of users){%>
+                    <option value="<%=i.username%>"><%=i.username%></option>
+                <%}%>
+            </select>
+            <br>
+            <input type="password" name="password" id="password" placeholder="password">
+            <br>
+            <input type="submit" value="Login">
+            </form>
+    </div>
+    
+
+</body>
+</html>
